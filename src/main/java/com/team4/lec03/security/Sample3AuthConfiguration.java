@@ -19,22 +19,20 @@ public class Sample3AuthConfiguration {
    * @return
    * @throws Exception
    */
-  /*
-   * @Bean
-   * public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-   * http.formLogin(login -> login
-   * .permitAll())
-   * .logout(logout -> logout
-   * .logoutUrl("/logout")
-   * .logoutSuccessUrl("/")) // ログアウト後に / にリダイレクト
-   * .authorizeHttpRequests(authz -> authz
-   * .requestMatchers("/sample3/**").authenticated() // /sample3/以下は認証済みであること
-   * .anyRequest().permitAll()) // 上記以外は全員アクセス可能
-   */
-  // .csrf(csrf -> csrf
-  // .ignoringRequestMatchers("/sample2*/**")); // sample2用にCSRF対策を無効化
-  // return http.build();
-  // }
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.formLogin(login -> login
+        .permitAll())
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/")) // ログアウト後に / にリダイレクト
+        .authorizeHttpRequests(authz -> authz
+            .requestMatchers("/sample3/**").authenticated() // /sample3/以下は認証済みであること
+            .anyRequest().permitAll()) // 上記以外は全員アクセス可能
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers("/sample2*/**")); // sample2用にCSRF対策を無効化
+    return http.build();
+  }
 
   /**
    * 認証処理に関する設定（誰がどのようなロールでログインできるか）
@@ -58,7 +56,7 @@ public class Sample3AuthConfiguration {
         .roles("ADMIN").build();
 
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
-    return new InMemoryUserDetailsManager(user1,admin);
+    return new InMemoryUserDetailsManager(user1, admin);
   }
 
 }
