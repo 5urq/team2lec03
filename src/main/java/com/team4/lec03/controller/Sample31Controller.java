@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class Sample31Controller {
 
   @Autowired
-  //private Room room;
+  // private Room room;
 
   @GetMapping("step1")
   public String sample31() {
@@ -43,38 +43,44 @@ public class Sample31Controller {
    * @param prin  ログインユーザ情報が保持されるオブジェクト
    * @return
    */
+
+  /**
+   * Sample3-2: ログインユーザ名をGETで取得する処理
+   */
+
   @GetMapping("step2")
   public String sample32(ModelMap model, Principal prin) {
     String loginUser = prin.getName(); // ログインユーザ情報
     model.addAttribute("login_user", loginUser);
     return "sample31.html";
   }
-/* 
-  @PostMapping("step6")
-  public String sample36(@RequestParam Integer hiku1, @RequestParam Integer hiku2, ModelMap model) {
-    int kekka = hiku1 - hiku2;
-    model.addAttribute("hikukekka", kekka);
-    return "sample33.html";
-  }
-
-  @GetMapping("step8")
-  public String sample38(Principal prin, ModelMap model) {
-    String loginUser = prin.getName();
-    this.room.addUser(loginUser);
-    model.addAttribute("room", this.room);
-
-    return "sample37.html";
-  }
-
-  @GetMapping("step9")
-  public String sample39(Principal prin, ModelMap model) {
-    String loginUser = prin.getName();
-    Room newRoom = new Room();
-    newRoom.addUser(loginUser);
-    model.addAttribute("new_room", newRoom);
-
-    return "sample37.html";
-  }
-*/
+  /*
+   * @PostMapping("step6")
+   * public String sample36(@RequestParam Integer hiku1, @RequestParam Integer
+   * hiku2, ModelMap model) {
+   * int kekka = hiku1 - hiku2;
+   * model.addAttribute("hikukekka", kekka);
+   * return "sample33.html";
+   * }
+   *
+   * @GetMapping("step8")
+   * public String sample38(Principal prin, ModelMap model) {
+   * String loginUser = prin.getName();
+   * this.room.addUser(loginUser);
+   * model.addAttribute("room", this.room);
+   *
+   * return "sample37.html";
+   * }
+   *
+   * @GetMapping("step9")
+   * public String sample39(Principal prin, ModelMap model) {
+   * String loginUser = prin.getName();
+   * Room newRoom = new Room();
+   * newRoom.addUser(loginUser);
+   * model.addAttribute("new_room", newRoom);
+   *
+   * return "sample37.html";
+   * }
+   */
 
 }
